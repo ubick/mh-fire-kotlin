@@ -8,12 +8,18 @@ import java.io.FileReader
 
 fun main() {
     println("Starting...")
+
+    val transactionParser = TransactionParser()
+
     val fileName = "./resources/transactions-demo.csv"
     val data = parseCsv(fileName)
 
-    val transactions = convertTransactions(data)
+    val transactions = transactionParser.parse(
+        convertTransactions(data)
+    )
 
-    println(Json.encodeToString(transactions))
+    val format = Json { prettyPrint = true }
+    println(format.encodeToString(transactions))
 }
 
 fun parseCsv(fileName: String): MutableList<Map<String, String>>  {
@@ -45,3 +51,4 @@ fun convertTransactions(rawData: MutableList<Map<String, String>>): MutableList<
 
     return transactions
 }
+

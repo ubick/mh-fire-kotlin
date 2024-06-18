@@ -1,5 +1,5 @@
 DATE,AMOUNT,DESCRIPTION,CATEGORY,CATEGORY GROUP,ACCOUNT,TO ACCOUNT,PROJECT,NOTES
 "2024-03-26",-2,"monthly santander fee","Service fees & bank charges","Bills and utilities","Doe ST","N/A","N/A",""
 "2024-03-26",-23.58,"tesco","Groceries","Shopping","JOHN","N/A","N/A",""
-"2024-03-25",-30.46,"Mcdonalds, Milton keynes","Eating out","Entertainment","MR JOHN","N/A","N/A",""
+"2024-03-25",-30.46,"Mcdonalds Milton keynes","Eating out","Entertainment","MR JOHN","N/A","N/A",""
 "2024-03-25",-200,"Transfer to couson","Savings","Transfers","123456 XXXX0505","N/A","N/A",""
