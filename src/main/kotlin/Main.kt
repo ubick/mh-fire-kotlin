@@ -1,11 +1,9 @@
 package org.liviu
 
-import kotlinx.serialization.encodeToString
-import kotlinx.serialization.json.Json
-
 fun main() {
     println("Starting...")
 
+    var writer: TransactionWriter = TransactionJsonWriter()
     val transactionTransformer = TransactionTransformer()
     val csvParser = CsvParser()
     val fileName = "./resources/transactions-demo.csv"
@@ -13,9 +11,7 @@ fun main() {
     val transactions = transactionTransformer.fromList(
         csvParser.parse(fileName)
     )
-
-    val format = Json { prettyPrint = true }
-    println(format.encodeToString(transactions))
+    writer.write(transactions)
 }
 
 
