@@ -3,6 +3,8 @@ package org.liviu
 import kotlinx.datetime.LocalDate
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
+import org.liviu.transaction.Transaction
+import org.liviu.transaction.TransactionTransformer
 
 class TransactionTransformerTest {
 

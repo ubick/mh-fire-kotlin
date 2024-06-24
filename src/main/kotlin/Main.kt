@@ -1,9 +1,13 @@
 package org.liviu
 
+import org.liviu.transaction.TransactionJsonWriter
+import org.liviu.transaction.TransactionTransformer
+import org.liviu.transaction.TransactionWriter
+
 fun main() {
     println("Starting...")
 
-    var writer: TransactionWriter = TransactionJsonWriter()
+    val writer: TransactionWriter = TransactionJsonWriter()
     val transactionTransformer = TransactionTransformer()
     val csvParser = CsvParser()
     val fileName = "./resources/transactions-demo.csv"

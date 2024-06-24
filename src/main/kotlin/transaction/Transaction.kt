@@ -1,4 +1,4 @@
-package org.liviu
+package org.liviu.transaction
 
 import kotlinx.datetime.LocalDate
 import kotlinx.serialization.Serializable
