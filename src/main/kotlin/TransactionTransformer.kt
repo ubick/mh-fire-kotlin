@@ -1,7 +1,15 @@
 package org.liviu
 
-class TransactionParser {
-    fun parse(transactions: List<Transaction>): List<Transaction> {
+import kotlinx.datetime.LocalDate
+
+class TransactionTransformer {
+    fun fromList(list: MutableList<Map<String, String>>): List<Transaction> {
+        val transactions = filterTransactions(list)
+
+        return cleanCategories(transactions)
+    }
+
+    private fun cleanCategories(transactions: List<Transaction>): List<Transaction> {
         val categoriesMap = mapOf(
             "Telephone & mobile" to "Bank, Legal, Tax",
             "Service fees & bank charges" to "Bank, Legal, Tax",
@@ -55,5 +63,22 @@ class TransactionParser {
                 category
             )
         }
+    }
+
+    private fun filterTransactions(rawData: MutableList<Map<String, String>>): MutableList<Transaction> {
+        val transactions: MutableList<Transaction> = mutableListOf()
+
+        for (item in rawData) {
+            val t = Transaction(
+                LocalDate.parse(item["DATE"]?:""),
+                item["AMOUNT"]?.toDoubleOrNull()?: 0.0,
+                item["DESCRIPTION"]?: "",
+                item["CATEGORY"]?: ""
+            )
+
+            transactions.add(t)
+        }
+
+        return transactions
     }
 }
