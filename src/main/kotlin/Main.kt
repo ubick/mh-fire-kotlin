@@ -1,21 +1,23 @@
 package org.liviu
 
-import org.liviu.transaction.TransactionJsonWriter
+import org.liviu.transaction.GoogleSheetsWriter
 import org.liviu.transaction.TransactionTransformer
 import org.liviu.transaction.TransactionWriter
 
 fun main() {
     println("Starting...")
 
-    val writer: TransactionWriter = TransactionJsonWriter()
-    val transactionTransformer = TransactionTransformer()
+    val transformer = TransactionTransformer()
+    val writer: TransactionWriter = GoogleSheetsWriter()
+//    val writer: TransactionWriter = JsonWriter()
     val csvParser = CsvParser()
     val fileName = "./resources/transactions-demo.csv"
 
-    val transactions = transactionTransformer.fromList(
+    val transactions = transformer.fromList(
         csvParser.parse(fileName)
     )
-    writer.write(transactions)
+    val aggregated = transformer.aggregateToCategories(transactions)
+    writer.write(aggregated)
 }
 
 

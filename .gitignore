@@ -43,3 +43,6 @@ bin/
 
 .idea/
 gradle/wrapper/gradle-wrapper.properties
+
+/resources/credentials.json
+/src/main/resources/

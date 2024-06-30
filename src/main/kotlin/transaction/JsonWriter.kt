@@ -3,9 +3,14 @@ package org.liviu.transaction
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 
-class TransactionJsonWriter : TransactionWriter {
+class JsonWriter: TransactionWriter {
+    private val format = Json { prettyPrint = true }
+
     override fun write(transactions: List<Transaction>) {
-        val format = Json { prettyPrint = true }
         println(format.encodeToString(transactions))
+    }
+
+    override fun write(data: Map<String, Double>) {
+        println(format.encodeToString(data))
     }
 }

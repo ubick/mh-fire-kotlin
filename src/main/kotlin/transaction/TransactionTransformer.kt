@@ -3,10 +3,44 @@ package org.liviu.transaction
 import kotlinx.datetime.LocalDate
 
 class TransactionTransformer {
-    fun fromList(list: MutableList<Map<String, String>>): List<Transaction> {
-        val transactions = filterTransactions(list)
+    fun aggregateToCategories(transactions: List<Transaction>): Map<String, Double> {
+        val categories: MutableMap<String, Double> = mutableMapOf(
+            "Bank, Legal, Tax" to 0.0,
+            "Groceries" to 0.0,
+            "Transport" to 0.0,
+            "Car" to 0.0,
+            "PhoneNetTV" to 0.0,
+            "Utilities" to 0.0,
+            "Kids" to 0.0,
+            "Experiences" to 0.0,
+            "Restaurant" to 0.0,
+            "Clothing" to 0.0,
+            "Household" to 0.0,
+            "Hobbies" to 0.0,
+            "ATM" to 0.0,
+            "Subscriptions" to 0.0,
+            "Personal care" to 0.0,
+            "Gifts" to 0.0,
+            "Holiday" to 0.0,
+            "Income" to 0.0,
+            "Transfers" to 0.0,
+            "Uncategorized" to 0.0
+        )
 
-        return cleanCategories(transactions)
+        for (transaction in transactions) {
+            val currentValue = categories.getOrDefault(transaction.category, 0.0)
+            categories[transaction.category] = currentValue + Math.abs(transaction.amount)
+        }
+
+        val categoriesToExclude = setOf("Uncategorized", "Transfers", "Income")
+
+        return categories.filterNot { categoriesToExclude.contains(it.key) }
+    }
+
+    fun fromList(list: MutableList<Map<String, String>>): List<Transaction> {
+        val transactions = cleanCategories(filterTransactions(list))
+
+        return transactions
     }
 
     private fun cleanCategories(transactions: List<Transaction>): List<Transaction> {
